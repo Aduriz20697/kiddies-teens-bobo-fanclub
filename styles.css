@@ -824,6 +824,23 @@ th {
         padding: 1.5rem;
         margin: 1rem 0;
     }
+    
+    .form-group {
+        margin-bottom: 2rem;
+        clear: both;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 1rem;
+    }
+    
+    .registration {
+        padding: 1.5rem;
+    }
 }
 
 .payment-card {
