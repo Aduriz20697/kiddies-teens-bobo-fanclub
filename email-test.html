@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Test - Kiddies Teens with Bobo</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 2rem auto; padding: 2rem; }
+        .form-group { margin: 1rem 0; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+        input, textarea { width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px; }
+        button { background: #007bff; color: white; padding: 1rem 2rem; border: none; border-radius: 5px; cursor: pointer; }
+        .config { background: #f8f9fa; padding: 1rem; border-radius: 5px; margin: 1rem 0; }
+        .error { color: red; } .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>EmailJS Test for Bobo Fan Club</h1>
+    
+    <div class="config">
+        <h3>Step 1: Configure EmailJS</h3>
+        <div class="form-group">
+            <label>Service ID:</label>
+            <input type="text" id="serviceId" placeholder="service_xxxxxxx">
+        </div>
+        <div class="form-group">
+            <label>Template ID:</label>
+            <input type="text" id="templateId" placeholder="template_xxxxxxx">
+        </div>
+        <div class="form-group">
+            <label>Public Key:</label>
+            <input type="text" id="publicKey" placeholder="Your EmailJS Public Key">
+        </div>
+        <button onclick="initEmailJS()">Initialize EmailJS</button>
+        <div id="initStatus"></div>
+    </div>
+    
+    <div class="config">
+        <h3>Step 2: Test Email</h3>
+        <div class="form-group">
+            <label>Test Email Address:</label>
+            <input type="email" id="testEmail" placeholder="test@example.com">
+        </div>
+        <div class="form-group">
+            <label>Member Name:</label>
+            <input type="text" id="memberName" placeholder="Test Member">
+        </div>
+        <button onclick="sendTestEmail()">Send Test Email</button>
+        <div id="emailStatus"></div>
+    </div>
+    
+    <div class="config">
+        <h3>Step 3: Update Admin Configuration</h3>
+        <p>Once the test works, copy these values to your admin.js file:</p>
+        <textarea id="configCode" rows="6" readonly>
+// Update these values in admin.js:
+const EMAIL_CONFIG = {
+    serviceId: 'your_service_id_here',
+    templateId: 'your_template_id_here', 
+    publicKey: 'your_public_key_here'
+};
+        </textarea>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        function initEmailJS() {
+            const serviceId = document.getElementById('serviceId').value;
+            const templateId = document.getElementById('templateId').value;
+            const publicKey = document.getElementById('publicKey').value;
+            const status = document.getElementById('initStatus');
+            
+            if (!serviceId || !templateId || !publicKey) {
+                status.innerHTML = '<p class="error">Please fill in all fields</p>';
+                return;
+            }
+            
+            try {
+                emailjs.init(publicKey);
+                status.innerHTML = '<p class="success">✅ EmailJS initialized successfully!</p>';
+                
+                // Update config code
+                document.getElementById('configCode').value = `// Update these values in admin.js:
+const EMAIL_CONFIG = {
+    serviceId: '${serviceId}',
+    templateId: '${templateId}',
+    publicKey: '${publicKey}'
+};`;
+                
+            } catch (error) {
+                status.innerHTML = `<p class="error">❌ Initialization failed: ${error.message}</p>`;
+            }
+        }
+        
+        function sendTestEmail() {
+            const serviceId = document.getElementById('serviceId').value;
+            const templateId = document.getElementById('templateId').value;
+            const testEmail = document.getElementById('testEmail').value;
+            const memberName = document.getElementById('memberName').value;
+            const status = document.getElementById('emailStatus');
+            
+            if (!serviceId || !templateId || !testEmail || !memberName) {
+                status.innerHTML = '<p class="error">Please fill in all fields and initialize EmailJS first</p>';
+                return;
+            }
+            
+            status.innerHTML = '<p>Sending test email...</p>';
+            
+            const emailParams = {
+                to_name: memberName,
+                to_email: testEmail,
+                member_name: memberName,
+                school_name: 'Test School',
+                payment_reference: 'TEST123456',
+                registration_date: new Date().toISOString().split('T')[0],
+                reply_to: 'kiddiesteenswithbobo@gmail.com'
+            };
+            
+            emailjs.send(serviceId, templateId, emailParams)
+                .then(function(response) {
+                    status.innerHTML = `<p class="success">✅ Test email sent successfully to ${testEmail}!</p>`;
+                    console.log('Success:', response);
+                })
+                .catch(function(error) {
+                    status.innerHTML = `<p class="error">❌ Email failed: ${error.text || error.message}</p>`;
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</body>
+</html>

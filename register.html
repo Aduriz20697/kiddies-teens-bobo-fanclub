@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Kiddies Teens with Bobo Fan Club</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+</head>
+<body>
+    <header>
+        <h1>Join Kiddies Teens with Bobo</h1>
+        <p>Registration Form</p>
+    </header>
+    
+    <main>
+        <section class="registration">
+            <h2>Fan Club Registration</h2>
+            <p>Choose your registration type and fill out the form below!</p>
+            
+            <div class="registration-tabs">
+                <button type="button" class="tab-btn active" onclick="showTab('individual')">Individual Registration</button>
+                <button type="button" class="tab-btn" onclick="showTab('school')">School Registration</button>
+            </div>
+            
+            <form id="registrationForm" class="tab-content active">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="school_name">School Name *</label>
+                    <input type="text" id="school_name" name="school_name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="grade_level">Grade Level *</label>
+                    <select id="grade_level" name="grade_level" required>
+                        <option value="">Select Grade Level</option>
+                        <option value="primary">Primary (1-6)</option>
+                        <option value="junior">Junior Secondary (7-9)</option>
+                        <option value="senior">Senior Secondary (10-12)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="class_form">Class/Form</label>
+                    <input type="text" id="class_form" name="class_form">
+                </div>
+                
+                <div class="form-group">
+                    <label for="parent_phone">Parent/Guardian Phone *</label>
+                    <input type="tel" id="parent_phone" name="parent_phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="birthday">Date of Birth</label>
+                    <input type="date" id="birthday" name="birthday">
+                </div>
+                
+                <div class="payment-section">
+                    <h3>💳 Membership Payment</h3>
+                    <p>Complete your registration by making payment to any of these accounts:</p>
+                    
+                    <div class="payment-options">
+                        <div class="payment-card">
+                            <h4>🏦 Bank Transfer</h4>
+                            <p><strong>Account Name:</strong> Kiddies Teens with Bobo</p>
+                            <p><strong>Account Number:</strong> 1234567890</p>
+                            <p><strong>Bank:</strong> First Bank Nigeria</p>
+                            <p><strong>Amount:</strong> ₦8,500</p>
+                        </div>
+                        
+                        <div class="payment-card">
+                            <h4>📱 Mobile Money</h4>
+                            <p><strong>Opay:</strong> 08183630819</p>
+                            <p><strong>Amount:</strong> ₦8,500</p>
+                            <p><strong>Acct Name:</strong> <b>IBE AMOS</b></p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="payment_reference">Payment Reference/Transaction ID *</label>
+                        <input type="text" id="payment_reference" name="payment_reference" placeholder="Enter transaction reference" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="payment_method">Payment Method *</label>
+                        <select id="payment_method" name="payment_method" required>
+                            <option value="">Select Payment Method</option>
+                            <option value="bank_transfer">Bank Transfer</option>
+                            <option value="opay">Opay</option>
+                            <option value="palmpay">PalmPay</option>
+                            <option value="kuda">Kuda Bank</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button type="submit">Complete Registration & Payment</button>
+            </form>
+            
+            <div id="message"></div>
+            
+            <form id="schoolRegistrationForm" class="tab-content">
+                <div class="form-group">
+                    <label for="school_name_reg">School Name *</label>
+                    <input type="text" id="school_name_reg" name="school_name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="school_address">School Address *</label>
+                    <textarea id="school_address" name="school_address" rows="3" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="principal_name">Principal/Head Teacher Name *</label>
+                    <input type="text" id="principal_name" name="principal_name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact_person">Contact Person *</label>
+                    <input type="text" id="contact_person" name="contact_person" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact_email">Contact Email *</label>
+                    <input type="email" id="contact_email" name="contact_email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact_phone">Contact Phone *</label>
+                    <input type="tel" id="contact_phone" name="contact_phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="student_count">Number of Students Registering *</label>
+                    <input type="number" id="student_count" name="student_count" min="1" max="1000" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="grade_levels">Grade Levels *</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="grade_levels" value="primary"> Primary (1-6)</label>
+                        <label><input type="checkbox" name="grade_levels" value="junior"> Junior Secondary (7-9)</label>
+                        <label><input type="checkbox" name="grade_levels" value="senior"> Senior Secondary (10-12)</label>
+                    </div>
+                </div>
+                
+                <div class="payment-section">
+                    <h3>💳 School Membership Payment</h3>
+                    <p>Payment calculation: ₦1,500 per student</p>
+                    <div id="totalAmount" class="total-amount">Total Amount: ₦0</div>
+                    
+                    <div class="payment-options">
+                        <div class="payment-card">
+                            <h4>🏦 Bank Transfer</h4>
+                            <p><strong>Account Name:</strong> Kiddies Teens with Bobo</p>
+                            <p><strong>Account Number:</strong> 1234567890</p>
+                            <p><strong>Bank:</strong> First Bank Nigeria</p>
+                        </div>
+                        
+                        <div class="payment-card">
+                            <h4>📱 Mobile Money</h4>
+                            <p><strong>Opay:</strong> 08183630819</p>
+                            <p><strong>PalmPay:</strong> 08183630819</p>
+                            <p><strong>Kuda:</strong> 2087654321</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="school_payment_reference">Payment Reference/Transaction ID *</label>
+                        <input type="text" id="school_payment_reference" name="payment_reference" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="school_payment_method">Payment Method *</label>
+                        <select id="school_payment_method" name="payment_method" required>
+                            <option value="">Select Payment Method</option>
+                            <option value="bank_transfer">Bank Transfer</option>
+                            <option value="opay">Opay</option>
+                            <option value="palmpay">PalmPay</option>
+                            <option value="kuda">Kuda Bank</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="payment_evidence">Payment Evidence (Screenshot/Receipt)</label>
+                        <input type="file" id="payment_evidence" name="payment_evidence" accept="image/*,.pdf">
+                        <small>Upload screenshot of payment or receipt (optional but recommended)</small>
+                    </div>
+                </div>
+                
+                <button type="submit">Register School</button>
+            </form>
+            
+            <div id="schoolMessage"></div>
+            
+            <div class="back-link">
+                <a href="index.html">← Back to Home</a>
+            </div>
+        </section>
+    </main>
+    
+    <script src="register.js"></script>
+</body>
+</html>

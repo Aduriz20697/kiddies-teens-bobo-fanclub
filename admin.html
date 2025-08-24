@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Kiddies Teens with Bobo</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+        <p>Kiddies Teens with Bobo Fan Club</p>
+    </header>
+    
+    <main>
+        <section class="admin-login" id="loginSection">
+            <h2>Admin Login</h2>
+            <form id="loginForm">
+                <input type="password" id="adminPassword" placeholder="Enter Admin Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </section>
+
+        <section class="admin-dashboard" id="dashboardSection" style="display: none;">
+            <div class="admin-nav">
+                <button onclick="showSection('members')" class="nav-btn active">Members</button>
+                <button onclick="showSection('birthdays')" class="nav-btn">Birthdays</button>
+                <button onclick="showSection('export')" class="nav-btn">Export Data</button>
+                <button onclick="logout()" class="nav-btn logout">Logout</button>
+            </div>
+
+            <div id="membersSection" class="admin-section">
+                <h3>Registered Members</h3>
+                <div class="stats">
+                    <div class="stat-card">
+                        <h4>Total Members</h4>
+                        <span id="totalMembers">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <h4>This Month</h4>
+                        <span id="monthlyMembers">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Verified Payments</h4>
+                        <span id="verifiedPayments">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Pending Payments</h4>
+                        <span id="pendingPayments">0</span>
+                    </div>
+                </div>
+                <div class="data-table">
+                    <table id="membersTable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>School</th>
+                                <th>Grade</th>
+                                <th>Payment Status</th>
+                                <th>Payment Ref</th>
+                                <th>Payment Method</th>
+                                <th>Registration Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="birthdaysSection" class="admin-section" style="display: none;">
+                <h3>Birthday Database</h3>
+                <div class="data-table">
+                    <table id="birthdaysTable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Birthday</th>
+                                <th>Age</th>
+                                <th>Month</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="exportSection" class="admin-section" style="display: none;">
+                <h3>Export Data</h3>
+                <div class="export-buttons">
+                    <button onclick="exportMembers()" class="export-btn">Export Members (JSON)</button>
+                    <button onclick="exportBirthdays()" class="export-btn">Export Birthdays (JSON)</button>
+                    <button onclick="exportMembersCSV()" class="export-btn">Export Members (CSV)</button>
+                    <button onclick="testEmailSystem()" class="export-btn">Test Email System</button>
+                    <button onclick="clearAllData()" class="export-btn danger">Clear All Data</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
