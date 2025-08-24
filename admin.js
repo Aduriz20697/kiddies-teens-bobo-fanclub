@@ -257,11 +257,22 @@ function sendWelcomeEmail(member) {
         .catch(function(error) {
             console.error('Email sending failed:', error);
             loadingNotification.remove();
-            showProfessionalNotification(
-                'Email Delivery Issue',
-                `Member: ${member.name}\nPayment verified but email failed to send\nError: ${error.text || error.message || 'Unknown error'}\n\nMembership is still activated. Please contact member manually.`,
-                'warning'
-            );
+            
+            // Specific error handling for Gmail API issues
+            let errorTitle = 'Email Delivery Issue';
+            let errorMessage = `Member: ${member.name}\nPayment verified but email failed to send\n`;
+            
+            if (error.text && error.text.includes('insufficient authentication scopes')) {
+                errorTitle = 'Gmail API Configuration Error';
+                errorMessage += `Error: Gmail API authentication scope issue\n`;
+                errorMessage += `Technical Details: ${error.text}\n\n`;
+            } else {
+                errorMessage += `Error: ${error.text || error.message || 'Unknown error'}\n\n`;
+            }
+            
+            errorMessage += `Membership is still activated. Please contact member manually.`;
+            
+            showProfessionalNotification(errorTitle, errorMessage, 'warning');
             showEmailTemplate(member);
         });
 }
