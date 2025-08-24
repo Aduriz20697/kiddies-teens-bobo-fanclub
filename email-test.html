@@ -50,7 +50,17 @@
     </div>
     
     <div class="config">
-        <h3>Step 3: Update Admin Configuration</h3>
+        <h3>Step 3: EmailJS Template Setup</h3>
+        <p><strong>IMPORTANT:</strong> In your EmailJS template settings, make sure:</p>
+        <ul>
+            <li><strong>To Email</strong> field contains: <code>{{to_email}}</code></li>
+            <li><strong>From Name</strong>: Kiddies Teens with Bobo Fan Club</li>
+            <li><strong>Subject</strong>: Welcome to Kiddies Teens with Bobo Fan Club! 🎉</li>
+        </ul>
+    </div>
+    
+    <div class="config">
+        <h3>Step 4: Update Admin Configuration</h3>
         <p>Once the test works, copy these values to your admin.js file:</p>
         <textarea id="configCode" rows="6" readonly>
 // Update these values in admin.js:

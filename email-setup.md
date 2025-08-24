@@ -1,4 +1,4 @@
-# Email Setup Instructions for Kiddies Teens with Bobo Fan Club
+# Email Setup Instructions for Kiddies Teen Fan Club with Bobo
 
 ## EmailJS Setup (Free Email Service)
 
@@ -17,14 +17,20 @@
 ### Step 3: Create Email Template
 1. Go to "Email Templates"
 2. Click "Create New Template"
-3. Use this template:
+3. **IMPORTANT**: Set the "To Email" field to: `{{to_email}}`
+4. Use this template:
 
+**Template Settings:**
+- **To Email**: `{{to_email}}` (REQUIRED)
+- **From Name**: Kiddies Teens with Bobo Fan Club
+- **Subject**: Welcome to Kiddies Teens with Bobo Fan Club! 🎉
+- **Reply To**: your-email@gmail.com
+
+**Email Content:**
 ```
-Subject: Welcome to Kiddies Teens with Bobo Fan Club! 🎉
-
 Dear {{to_name}},
 
-Welcome to the Kiddies Teens with Bobo Fan Club! 🎉
+Welcome to the Kiddies Teen Fan Club with Bobo! 🎉
 
 We are thrilled to have you as part of our amazing community. Your payment has been received and verified.
 
@@ -44,12 +50,16 @@ We are thrilled to have you as part of our amazing community. Your payment has b
 Thank you for joining our community! We look forward to seeing you at our upcoming events.
 
 Best regards,
-Kiddies Teens with Bobo Fan Club Team
+Kiddies Teen Fan Club with Bobo Team
 📞 +234 818 363 0819
 📍 Lasustech Student Activities, Ikorodu, Lagos State
 ```
 
-4. Save template and note the **Template ID**
+4. **CRITICAL**: In template settings, make sure:
+   - **To Email** field contains: `{{to_email}}`
+   - **From Name**: Kiddies Teens with Bobo Fan Club
+   - **Reply To**: Your actual email address
+5. Save template and note the **Template ID**
 
 ### Step 4: Get Public Key
 1. Go to "Account" → "General"

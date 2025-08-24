@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Show success message
         messageDiv.innerHTML = `
             <div class="success-message">
-                🎉 Welcome to the Kiddies Teens with Bobo Fan Club, ${memberData.name}!
+                🎉 Welcome to the Kiddies Teen Fan Club with Bobo, ${memberData.name}!
                 <br>Your registration has been submitted successfully.
                 <br><strong>Payment Reference:</strong> ${memberData.paymentReference}
                 <br><strong>Payment Method:</strong> ${memberData.paymentMethod}
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Show success message
         schoolMessageDiv.innerHTML = `
             <div class="success-message">
-                🎉 ${schoolData.schoolName} has been registered successfully!
+                🎉 ${schoolData.schoolName} has been registered with Kiddies Teen Fan Club with Bobo successfully!
                 <br><strong>Students:</strong> ${schoolData.studentCount}
                 <br><strong>Total Amount:</strong> ₦${schoolData.totalAmount.toLocaleString()}
                 <br><strong>Payment Reference:</strong> ${schoolData.paymentReference}

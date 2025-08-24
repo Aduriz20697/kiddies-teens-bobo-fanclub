@@ -3,9 +3,9 @@ const ADMIN_PASSWORD = 'bobo2025'; // Change this password
 
 // EmailJS Configuration - Update these with your actual EmailJS credentials
 const EMAIL_CONFIG = {
-    serviceId: 'service_bobo_fanclub', // Replace with your EmailJS Service ID
-    templateId: 'template_welcome',    // Replace with your EmailJS Template ID
-    publicKey: 'YOUR_EMAILJS_PUBLIC_KEY' // Replace with your EmailJS Public Key
+    serviceId: 'service_p7r1e54', // Replace with your EmailJS Service ID
+    templateId: 'template_vj6a8ps',    // Replace with your EmailJS Template ID
+    publicKey: 'RDRFzaV66z2Y4V_3d' // Replace with your EmailJS Public Key
 };
 
 // Initialize EmailJS when page loads
@@ -213,29 +213,55 @@ function sendWelcomeEmail(member) {
         return;
     }
     
+    // Validate email address
+    if (!member.email || !member.email.includes('@')) {
+        this.showProfessionalNotification(
+            'Invalid Email Address',
+            `Cannot send welcome email\nMember: ${member.name}\nEmail: ${member.email || 'Not provided'}\n\nPayment verified but please update member's email address.`,
+            'error'
+        );
+        showEmailTemplate(member);
+        return;
+    }
+    
     const emailParams = {
         to_name: member.name,
         to_email: member.email,
         member_name: member.name,
-        school_name: member.school,
+        school_name: member.school || 'N/A',
         payment_reference: member.paymentReference || 'N/A',
         registration_date: member.registrationDate,
-        reply_to: 'kiddiesteenswithbobo@gmail.com' // Add your reply-to email
+        from_name: 'Kiddies Teen Fan Club with Bobo',
+        reply_to: 'kiddiesteenswithbobo@gmail.com'
     };
     
     console.log('Email parameters:', emailParams);
     
-    // Show loading message
-    const loadingMsg = alert('Sending welcome email...');
+    // Show professional loading notification
+    const loadingNotification = this.showLoadingNotification(
+        'Processing Payment Verification',
+        `Sending welcome email to ${member.name}...`,
+        member
+    );
     
     emailjs.send(EMAIL_CONFIG.serviceId, EMAIL_CONFIG.templateId, emailParams)
         .then(function(response) {
             console.log('Email sent successfully:', response);
-            alert(`✅ Welcome email sent to ${member.name} (${member.email}) successfully!`);
+            loadingNotification.remove();
+            showProfessionalNotification(
+                'Payment Verification Complete',
+                `Member: ${member.name}\nEmail: ${member.email}\nStatus: Welcome email sent successfully\nMembership activated`,
+                'success'
+            );
         })
         .catch(function(error) {
             console.error('Email sending failed:', error);
-            alert(`❌ Email sending failed. Error: ${error.text || error.message || 'Unknown error'}`);
+            loadingNotification.remove();
+            showProfessionalNotification(
+                'Email Delivery Issue',
+                `Member: ${member.name}\nPayment verified but email failed to send\nError: ${error.text || error.message || 'Unknown error'}\n\nMembership is still activated. Please contact member manually.`,
+                'warning'
+            );
             showEmailTemplate(member);
         });
 }
@@ -247,7 +273,7 @@ Subject: Welcome to Kiddies Teens with Bobo Fan Club! 🎉
 
 Dear ${member.name},
 
-Welcome to the Kiddies Teens with Bobo Fan Club! 🎉
+Welcome to the Kiddies Teen Fan Club with Bobo! 🎉
 
 We are thrilled to have you as part of our amazing community. Your payment has been received and verified.
 
@@ -267,7 +293,7 @@ We are thrilled to have you as part of our amazing community. Your payment has b
 Thank you for joining our community! We look forward to seeing you at our upcoming events.
 
 Best regards,
-Kiddies Teens with Bobo Fan Club Team
+Kiddies Teen Fan Club with Bobo Team
 📞 +234 818 363 0819
 📍 Lasustech Student Activities, Ikorodu, Lagos State
     `;
@@ -315,13 +341,150 @@ function testEmailSystem() {
     sendWelcomeEmail(testMember);
 }
 
+function showLoadingNotification(title, message, member) {
+    const modal = document.createElement('div');
+    modal.className = 'loading-notification-modal';
+    
+    modal.innerHTML = `
+        <div class="loading-overlay">
+            <div class="loading-content">
+                <div class="loading-header">
+                    <div class="loading-spinner"></div>
+                    <h3>${title}</h3>
+                </div>
+                <div class="loading-body">
+                    <div class="member-info">
+                        <div class="info-row">
+                            <span class="label">Member:</span>
+                            <span class="value">${member.name}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Email:</span>
+                            <span class="value">${member.email}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Status:</span>
+                            <span class="value status-processing">${message}</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    modal.style.cssText = `
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.8); z-index: 10001; display: flex;
+        align-items: center; justify-content: center;
+    `;
+    
+    const style = document.createElement('style');
+    style.textContent = `
+        .loading-overlay { background: white; border-radius: 15px; max-width: 450px; width: 90%; box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
+        .loading-header { padding: 2rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 15px 15px 0 0; display: flex; align-items: center; gap: 1rem; }
+        .loading-spinner { width: 24px; height: 24px; border: 3px solid rgba(255,255,255,0.3); border-top: 3px solid white; border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .loading-header h3 { margin: 0; font-size: 1.3rem; font-weight: 600; }
+        .loading-body { padding: 2rem; }
+        .member-info { margin-bottom: 1.5rem; }
+        .info-row { display: flex; justify-content: space-between; margin-bottom: 0.8rem; padding: 0.5rem 0; border-bottom: 1px solid #f0f0f0; }
+        .label { font-weight: 600; color: #666; }
+        .value { color: #333; }
+        .status-processing { color: #667eea; font-weight: 600; }
+        .progress-bar { width: 100%; height: 6px; background: #f0f0f0; border-radius: 3px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #667eea, #764ba2); border-radius: 3px; animation: progress 2s ease-in-out infinite; }
+        @keyframes progress { 0% { width: 0%; } 50% { width: 70%; } 100% { width: 100%; } }
+    `;
+    
+    document.head.appendChild(style);
+    document.body.appendChild(modal);
+    
+    return modal;
+}
+
+function showProfessionalNotification(title, message, type) {
+    // Create professional modal notification
+    const modal = document.createElement('div');
+    modal.className = 'professional-notification-modal';
+    
+    const typeIcons = {
+        success: '✅',
+        warning: '⚠️',
+        error: '❌',
+        info: 'ℹ️'
+    };
+    
+    const typeColors = {
+        success: '#28a745',
+        warning: '#ffc107',
+        error: '#dc3545',
+        info: '#17a2b8'
+    };
+    
+    modal.innerHTML = `
+        <div class="notification-overlay">
+            <div class="notification-content">
+                <div class="notification-header" style="background: ${typeColors[type] || '#17a2b8'}">
+                    <span class="notification-icon">${typeIcons[type] || 'ℹ️'}</span>
+                    <h3>${title}</h3>
+                </div>
+                <div class="notification-body">
+                    <pre>${message}</pre>
+                </div>
+                <div class="notification-footer">
+                    <button onclick="this.closest('.professional-notification-modal').remove()" class="notification-btn">
+                        Acknowledge
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Add styles
+    modal.style.cssText = `
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.7); z-index: 10000; display: flex;
+        align-items: center; justify-content: center;
+    `;
+    
+    const style = document.createElement('style');
+    style.textContent = `
+        .notification-overlay { background: white; border-radius: 10px; max-width: 500px; width: 90%; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .notification-header { padding: 1.5rem; color: white; border-radius: 10px 10px 0 0; display: flex; align-items: center; gap: 1rem; }
+        .notification-icon { font-size: 1.5rem; }
+        .notification-header h3 { margin: 0; font-size: 1.2rem; }
+        .notification-body { padding: 2rem; }
+        .notification-body pre { white-space: pre-wrap; font-family: inherit; margin: 0; line-height: 1.5; color: #333; }
+        .notification-footer { padding: 1rem 2rem 2rem; text-align: right; }
+        .notification-btn { background: #007bff; color: white; border: none; padding: 0.8rem 2rem; border-radius: 5px; cursor: pointer; font-weight: 600; }
+        .notification-btn:hover { background: #0056b3; }
+    `;
+    
+    document.head.appendChild(style);
+    document.body.appendChild(modal);
+    
+    // Auto-remove after 10 seconds for success messages
+    if (type === 'success') {
+        setTimeout(() => {
+            if (modal.parentNode) modal.remove();
+        }, 10000);
+    }
+}
+
 function clearAllData() {
     if (confirm('Are you sure you want to clear ALL data? This cannot be undone!')) {
         if (confirm('This will delete all members and birthdays. Are you absolutely sure?')) {
             localStorage.removeItem('bobo_members');
             localStorage.removeItem('bobo_birthdays');
             loadData();
-            alert('All data has been cleared.');
+            showProfessionalNotification(
+                'Data Cleared Successfully',
+                'All member and birthday data has been permanently deleted from the system.\n\nDatabase Status: Empty\nAction: Complete',
+                'success'
+            );
         }
     }
 }
