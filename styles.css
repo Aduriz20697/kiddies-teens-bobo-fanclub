@@ -809,12 +809,31 @@ th {
     margin: 1.5rem 0;
 }
 
+@media (max-width: 768px) {
+    .payment-options {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .payment-card {
+        margin-bottom: 1rem;
+    }
+    
+    .payment-section {
+        padding: 1.5rem;
+        margin: 1rem 0;
+    }
+}
+
 .payment-card {
     background: white;
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     border-left: 4px solid #28a745;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .payment-card h4 {
