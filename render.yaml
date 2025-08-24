@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: kiddies-teens-bobo-fanclub
+    env: static
+    staticPublishPath: .
+    buildCommand: npm install
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff

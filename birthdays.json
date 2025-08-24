@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Sarah Johnson",
+    "birthday": "2025-01-15",
+    "age": 12,
+    "dateAdded": "2025-01-01"
+  },
+  {
+    "id": 2,
+    "name": "Michael Brown",
+    "birthday": "2025-01-22",
+    "age": 10,
+    "dateAdded": "2025-01-01"
+  },
+  {
+    "id": 3,
+    "name": "Aisha Williams",
+    "birthday": "2025-01-28",
+    "age": 14,
+    "dateAdded": "2025-01-01"
+  }
+]
