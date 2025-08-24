@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiddies Teens with Bobo - Fan Club</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Kiddies Teens with Bobo</h1>
+        <p>Official Fan Club</p>
+    </header>
+    
+    <main>
+        <section class="welcome">
+            <h2>Welcome to Our Fan Club!</h2>
+            <p>Join the amazing community of Bobo fans!</p>
+        </section>
+        
+        <section class="gallery">
+            <h3>Photo Gallery</h3>
+            <div class="photos">
+                <div class="photo" onclick="selectPhoto(this)"><img src="Bobo.jpg" alt="Bobo"></div>
+                <div class="photo" onclick="selectPhoto(this)"><img src="Bobo 1.jpg" alt="Bobo 1"></div>
+                <div class="photo" onclick="selectPhoto(this)"><img src="Bobo 2.jpg" alt="Bobo 2"></div>
+                <div class="photo" onclick="selectPhoto(this)"><img src="bobo 3.jpg" alt="Bobo 3"></div>
+                <div class="photo" onclick="selectPhoto(this)"><img src="bobo 4.jpg" alt="Bobo 4"></div>
+                <div class="photo" onclick="selectPhoto(this)"><img src="bobo 5.jpg" alt="Bobo 5"></div>
+        </section>
+        
+        <section class="activities">
+            <h3>Fan Activities</h3>
+            <ul>
+                <li>🚆 Educational Tour Excursion (Train Station, Bobo Factory & More)</li>
+                <li>🎓 Educational Seminars [Career Talk]</li>
+                <li>⚽ Sport Competition</li>
+                <li>🎭 Talent Hunt</li>
+                <li>🛡️ Safety Week</li>
+                <li>🎨 Arts and Crafts Exhibition</li>
+                <li>✍️ Essay Competition</li>
+                <li>🗣️ Debate Competition</li>
+                <li>❓ Quiz Competitions</li>
+                <li>🎉 Annual Children Day (May 27th)</li>
+                <li>🎄 December Children Fun Fair</li>
+                <li>📚 Book Club & Reading Competition (October 1st)</li>
+                <li>📻 Saturday 1-Hour Live Radio Program</li>
+                <li>📰 Publications & Magazine Features</li>
+                <li>🎬 Educative and Inspirational Film Show</li>
+            </ul>
+        </section>
+        
+        <section class="benefits">
+            <h3>Membership Benefits</h3>
+            <div class="benefits-content">
+                <div class="benefit-category">
+                    <h4>🎆 Benefits for Fan Members</h4>
+                    <ul>
+                        <li>🎁 Welcome pack with company products</li>
+                        <li>🎫 Membership I.D Card (Coded)</li>
+                        <li>📺 TV, Radio, and Online program participation</li>
+                        <li>🎂 Birthday Greetings/Shout Out</li>
+                        <li>🎓 Yearly Scholarship (Stationery and Bursary)</li>
+                        <li>🏆 Annual Awards/Recognition for outstanding children</li>
+                        <li>🏥 Holiday Clinic (Vocational Training, Coding Camp)</li>
+                        <li>✈️ Foreign Trips/Vacation</li>
+                    </ul>
+                </div>
+                <div class="benefit-category">
+                    <h4>🏫 Benefits for Member Schools</h4>
+                    <ul>
+                        <li>🎓 Seminars for teaching and non-teaching staff</li>
+                        <li>💰 Sponsorship for at least one annual school event</li>
+                        <li>🎉 Participation in all yearly activities</li>
+                        <li>🏆 Annual award of excellence to outstanding schools</li>
+                        <li>📺 Media coverage for school events (token fee)</li>
+                        <li>🏪 Wholesale Bobo products for school tuck shop</li>
+                        <li>📱 Event showcase on our media platforms</li>
+                        <li>🏭 Excursions to factories and production facilities</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="calendar">
+            <h3>Activities for the Year</h3>
+            <div class="calendar-content">
+                <div class="quarter">
+                    <h4>🌱 Jan – March</h4>
+                    <ul>
+                        <li>🚆 Excursions/Field Trips</li>
+                        <li>🎬 Film Show</li>
+                        <li>✍️ Essay Competition</li>
+                        <li>🔬 STEM Quiz</li>
+                    </ul>
+                </div>
+                <div class="quarter">
+                    <h4>☀️ May – August</h4>
+                    <ul>
+                        <li>🔤 Spelling Bee</li>
+                        <li>🎉 Children's Day Fiesta</li>
+                        <li>🏥 Vocational Clinic (Summer)</li>
+                        <li>🎬 Film Show</li>
+                        <li>🎓 Teachers Seminars</li>
+                    </ul>
+                </div>
+                <div class="quarter">
+                    <h4>🍂 July – October</h4>
+                    <ul>
+                        <li>💻 Coding Camp</li>
+                    </ul>
+                </div>
+                <div class="quarter">
+                    <h4>❄️ September – December</h4>
+                    <ul>
+                        <li>📚 Book Fair</li>
+                        <li>🗣️ Debate</li>
+                        <li>🏆 Excellence Award</li>
+                        <li>♟️ Chess Competition</li>
+                        <li>🎄 December Funfair</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="ongoing">
+            <h3>Ongoing Activities</h3>
+            <div class="ongoing-content">
+                <img src="Holiday clinic.jpg" alt="Holiday Clinic" class="ongoing-img" onclick="selectPhoto(this.parentElement)">
+                <div class="ongoing-text">
+                    <h4>🏥 Holiday Clinic (Vocational Training)</h4>
+                    <p>Join our exciting Holiday Clinic program where young fans learn valuable skills! We offer hands-on training in arts & crafts, basic computer skills, cooking, and creative workshops. Perfect for school holidays - kids have fun while developing practical abilities for their future.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="birthday">
+            <h3>Birthday Shout Out</h3>
+            <div class="birthday-content">
+                <p>🎂 Celebrating our amazing fan club members!</p>
+                <div class="birthday-list">
+                    <div class="birthday-card">
+                        <h4>🎉 This Month's Birthdays</h4>
+                        <ul>
+                            <li>🎈 Happy Birthday Sarah! (Age 12)</li>
+                            <li>🎈 Happy Birthday Michael! (Age 10)</li>
+                            <li>🎈 Happy Birthday Aisha! (Age 14)</li>
+                        </ul>
+                    </div>
+                    <div class="birthday-form">
+                        <h4>📅 Submit Your Birthday</h4>
+                        <form>
+                            <input type="text" placeholder="Your Name" required>
+                            <input type="date" placeholder="Birthday" required>
+                            <button type="submit">Add My Birthday</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="join">
+            <h3>Join Us</h3>
+            <form id="joinForm">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <input type="text" name="school_name" placeholder="School Name" required>
+                <select name="grade_level" required>
+                    <option value="">Select Grade Level</option>
+                    <option value="primary">Primary (1-6)</option>
+                    <option value="junior">Junior Secondary (7-9)</option>
+                    <option value="senior">Senior Secondary (10-12)</option>
+                </select>
+                <input type="text" name="class_form" placeholder="Class/Form">
+                <input type="tel" name="parent_phone" placeholder="Parent/Guardian Phone">
+                <button type="submit">Join Fan Club</button>
+            </form>
+            <div id="message"></div>
+        </section>
+        
+        <section class="contact">
+            <h3>Branch Office</h3>
+            <div class="contact-info">
+                <p>📍 Lasustech Student Activites Ikorodu, Lagos State</p>
+                <p>📞 +234 818 363 0819</p>
+            </div>
+        </section>
+        
+        <section class="social">
+            <h3>Follow Us</h3>
+            <div class="social-links">
+                <a href="https://www.facebook.com/share/1CMcsjYcax/?mibextid=wwXIfr">📘 Facebook</a>
+                <a href="https://www.tiktok.com/@official_kiddies_t?_t=ZS-8z8w6r9dl8k&_r=1">🎵 TikTok</a>
+            </div>
+        </section>
+    </main>
+    
+    <div id="modal" class="modal" onclick="closeModal()">
+        <img id="modalImg" src="" alt="">
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+</html>
