@@ -155,15 +155,7 @@ function deleteBirthday(index) {
     }
 }
 
-function exportMembers() {
-    const members = localStorage.getItem('bobo_members');
-    downloadFile('bobo_members.json', members || '[]');
-}
 
-function exportBirthdays() {
-    const birthdays = localStorage.getItem('bobo_birthdays');
-    downloadFile('bobo_birthdays.json', birthdays || '[]');
-}
 
 function exportMembersCSV() {
     const members = JSON.parse(localStorage.getItem('bobo_members')) || [];
@@ -174,6 +166,19 @@ function exportMembersCSV() {
     });
     
     downloadFile('bobo_members.csv', csv);
+}
+
+function exportBirthdaysCSV() {
+    const birthdays = JSON.parse(localStorage.getItem('bobo_birthdays')) || [];
+    let csv = 'Name,Birthday,Age,Month\n';
+    
+    birthdays.forEach(birthday => {
+        const birthDate = new Date(birthday.birthday);
+        const monthName = birthDate.toLocaleString('default', { month: 'long' });
+        csv += `"${birthday.name}","${birthday.birthday}","${birthday.age}","${monthName}"\n`;
+    });
+    
+    downloadFile('bobo_birthdays.csv', csv);
 }
 
 function downloadFile(filename, content) {
