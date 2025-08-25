@@ -244,6 +244,9 @@ button {
     box-shadow: 0 8px 25px rgba(102,126,234,0.4);
     position: relative;
     overflow: hidden;
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
 }
 
 button::before {
