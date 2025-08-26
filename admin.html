@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Kiddies Teen Fan Club with Bobo</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="C:\Users\ADURAGBEMI\Downloads\kiddies-teens-bobo-fanclub-main\styles.css">
     <link rel="icon" type="image/jpeg" href="favicon.jpg">
 </head>
 <body>
@@ -24,9 +24,11 @@
 
         <section class="admin-dashboard" id="dashboardSection" style="display: none;">
             <div class="admin-nav">
-                <button onclick="showSection('members')" class="nav-btn active">Members</button>
-                <button onclick="showSection('birthdays')" class="nav-btn">Birthdays</button>
-                <button onclick="showSection('export')" class="nav-btn">Export Data</button>
+                <div class="nav-left">
+                    <button onclick="showSection('members')" class="nav-btn active">Members</button>
+                    <button onclick="showSection('birthdays')" class="nav-btn">Birthdays</button>
+                    <button onclick="showSection('export')" class="nav-btn">Export Data</button>
+                </div>
                 <button onclick="logout()" class="nav-btn logout">Logout</button>
             </div>
 
