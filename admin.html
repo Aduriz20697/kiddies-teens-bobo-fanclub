@@ -5,71 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Kiddies Teen Fan Club with Bobo</title>
     <link rel="stylesheet" href="C:\Users\ADURAGBEMI\Downloads\kiddies-teens-bobo-fanclub-main\styles.css">
-    <style>
-        .admin-login {
-            background: white;
-            padding: 3rem;
-            margin: 2rem auto;
-            border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            max-width: 400px;
-            text-align: center;
-        }
-        .admin-dashboard {
-            background: white;
-            padding: 2rem;
-            margin: 2rem auto;
-            border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            max-width: 1200px;
-        }
-        .admin-nav {
-            display: block;
-            margin-bottom: 1rem;
-            padding: 1rem;
-            background: #f8fafc;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-        }
-        .nav-left {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-        .nav-btn {
-            padding: 0.75rem 1.5rem;
-            background: #ffffff;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 0.875rem;
-            color: #374151;
-            white-space: nowrap;
-        }
-        .nav-btn.active {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-        }
-        .nav-btn.logout {
-            background: #ef4444;
-            color: white;
-            border-color: #ef4444;
-            flex-shrink: 0;
-        }
-        @media (max-width: 768px) {
-            .admin-nav {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            .nav-left {
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-        }
-    </style>
     <link rel="icon" type="image/jpeg" href="favicon.jpg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f8fafc; }
+        header { background: #1e293b; color: white; padding: 2rem; text-align: center; }
+        .admin-login { background: white; padding: 3rem; margin: 3rem auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); max-width: 400px; text-align: center; }
+        .admin-dashboard { background: white; padding: 2rem; margin: 2rem auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); max-width: 1200px; }
+        .admin-nav { padding: 1rem; background: #f1f5f9; border-radius: 6px; margin-bottom: 1rem; }
+        .nav-left { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .nav-btn { padding: 0.75rem 1.5rem; background: white; border: 1px solid #cbd5e1; border-radius: 4px; cursor: pointer; font-size: 0.875rem; color: #475569; transition: all 0.2s; }
+        .nav-btn:hover { background: #f8fafc; }
+        .nav-btn.active { background: #1e293b; color: white; }
+        .nav-btn.logout { background: #dc2626; color: white; border-color: #dc2626; }
+        .logout-container { text-align: right; margin-bottom: 1rem; }
+        .data-table { overflow-x: auto; margin-top: 1rem; }
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 6px; overflow: hidden; }
+        th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+        th { background: #f8fafc; font-weight: 600; color: #374151; }
+        .verify-btn { background: #059669; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; font-size: 0.8rem; cursor: pointer; margin-right: 0.5rem; }
+        .delete-btn { background: #dc2626; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; font-size: 0.8rem; cursor: pointer; }
+        .status-verified { background: #059669; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; }
+        .status-pending { background: #f59e0b; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .stat-card { background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 2rem; border-radius: 8px; text-align: center; }
+        .stat-card h4 { margin-bottom: 1rem; font-size: 1rem; }
+        .stat-card span { font-size: 2rem; font-weight: bold; }
+        .export-buttons { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+        .export-btn { padding: 1.5rem; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; background: #059669; color: white; }
+        .export-btn.danger { background: #dc2626; }
+        input[type="password"] { width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 4px; margin-bottom: 1rem; }
+        button[type="submit"] { background: #1e293b; color: white; padding: 0.75rem 2rem; border: none; border-radius: 4px; cursor: pointer; }
+    </style>
 </head>
 <body>
     <header>
@@ -87,15 +54,15 @@
         </section>
 
         <section class="admin-dashboard" id="dashboardSection" style="display: none;">
-            <div class="admin-nav">
-                <div class="nav-left">
+            <div style="padding: 1rem; background: #f1f5f9; border-radius: 6px; margin-bottom: 1rem;">
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
                     <button onclick="showSection('members')" class="nav-btn active">Members</button>
                     <button onclick="showSection('birthdays')" class="nav-btn">Birthdays</button>
                     <button onclick="showSection('export')" class="nav-btn">Export Data</button>
                 </div>
-            </div>
-            <div style="text-align: right; margin-bottom: 1rem;">
-                <button onclick="logout()" class="nav-btn logout">Logout</button>
+                <div style="text-align: right;">
+                    <button onclick="logout()" class="nav-btn logout">Logout</button>
+                </div>
             </div>
 
             <div id="membersSection" class="admin-section">
