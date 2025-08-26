@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Kiddies Teen Fan Club with Bobo</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="C:\Users\ADURAGBEMI\Downloads\kiddies-teens-bobo-fanclub-main\styles.css">
     <style>
         .admin-login {
             background: white;
@@ -24,11 +24,8 @@
             max-width: 1200px;
         }
         .admin-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            display: block;
+            margin-bottom: 1rem;
             padding: 1rem;
             background: #f8fafc;
             border-radius: 8px;
@@ -37,7 +34,7 @@
         .nav-left {
             display: flex;
             gap: 0.5rem;
-            flex: 1;
+            flex-wrap: wrap;
         }
         .nav-btn {
             padding: 0.75rem 1.5rem;
@@ -48,6 +45,7 @@
             font-weight: 500;
             font-size: 0.875rem;
             color: #374151;
+            white-space: nowrap;
         }
         .nav-btn.active {
             background: #667eea;
@@ -58,7 +56,17 @@
             background: #ef4444;
             color: white;
             border-color: #ef4444;
-            margin-left: 1rem;
+            flex-shrink: 0;
+        }
+        @media (max-width: 768px) {
+            .admin-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-left {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
         }
     </style>
     <link rel="icon" type="image/jpeg" href="favicon.jpg">
@@ -85,6 +93,8 @@
                     <button onclick="showSection('birthdays')" class="nav-btn">Birthdays</button>
                     <button onclick="showSection('export')" class="nav-btn">Export Data</button>
                 </div>
+            </div>
+            <div style="text-align: right; margin-bottom: 1rem;">
                 <button onclick="logout()" class="nav-btn logout">Logout</button>
             </div>
 
