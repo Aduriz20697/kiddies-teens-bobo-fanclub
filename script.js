@@ -28,33 +28,68 @@ const APP_CONFIG = {
 
 /**
  * Photo Gallery Manager
- * Handles photo modal functionality
+ * Handles photo modal functionality with slideshow
  */
 class PhotoGallery {
+    static currentIndex = 0;
+    static images = [];
+
+    /**
+     * Initialize gallery images array
+     */
+    static initImages() {
+        const photos = document.querySelectorAll('.photo img');
+        PhotoGallery.images = Array.from(photos).map(img => ({
+            src: img.src,
+            alt: img.alt
+        }));
+    }
+
     /**
      * Display photo in modal overlay
      * @param {HTMLElement} element - Photo container element
      */
     static selectPhoto(element) {
         try {
-            const modal = document.getElementById('modal');
-            const modalImg = document.getElementById('modalImg');
+            PhotoGallery.initImages();
             const img = element.querySelector('img');
-            
-            if (!modal || !modalImg || !img) {
-                console.error('Required elements not found for photo modal');
-                return;
-            }
-            
-            modal.style.display = 'block';
-            modalImg.src = img.src;
-            modalImg.alt = img.alt || 'Fan club photo';
-            
-            // Add keyboard support for accessibility
+            PhotoGallery.currentIndex = PhotoGallery.images.findIndex(image => image.src === img.src);
+            PhotoGallery.showModal();
             document.addEventListener('keydown', PhotoGallery.handleKeydown);
         } catch (error) {
             console.error('Error opening photo modal:', error);
         }
+    }
+
+    /**
+     * Show modal with current image
+     */
+    static showModal() {
+        const modal = document.getElementById('modal');
+        const modalImg = document.getElementById('modalImg');
+        
+        if (modal && modalImg && PhotoGallery.images[PhotoGallery.currentIndex]) {
+            modal.style.display = 'block';
+            const currentImage = PhotoGallery.images[PhotoGallery.currentIndex];
+            modalImg.src = currentImage.src;
+            modalImg.alt = currentImage.alt;
+        }
+    }
+
+    /**
+     * Navigate to next image
+     */
+    static nextImage() {
+        PhotoGallery.currentIndex = (PhotoGallery.currentIndex + 1) % PhotoGallery.images.length;
+        PhotoGallery.showModal();
+    }
+
+    /**
+     * Navigate to previous image
+     */
+    static prevImage() {
+        PhotoGallery.currentIndex = (PhotoGallery.currentIndex - 1 + PhotoGallery.images.length) % PhotoGallery.images.length;
+        PhotoGallery.showModal();
     }
 
     /**
@@ -79,6 +114,10 @@ class PhotoGallery {
     static handleKeydown(event) {
         if (event.key === 'Escape') {
             PhotoGallery.closeModal();
+        } else if (event.key === 'ArrowRight') {
+            PhotoGallery.nextImage();
+        } else if (event.key === 'ArrowLeft') {
+            PhotoGallery.prevImage();
         }
     }
 }
@@ -227,6 +266,8 @@ class App {
 // Global functions for backward compatibility
 window.selectPhoto = PhotoGallery.selectPhoto;
 window.closeModal = PhotoGallery.closeModal;
+window.nextImage = PhotoGallery.nextImage;
+window.prevImage = PhotoGallery.prevImage;
 
 // Initialize application
 App.init();
