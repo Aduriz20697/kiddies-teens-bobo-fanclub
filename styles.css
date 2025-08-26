@@ -35,7 +35,7 @@ body::before {
 header {
     text-align: center;
     padding: 4rem 2rem;
-    background: url('images/Fanclub-1050-x-540-2.jpg') center/cover;
+    background: url('Fanclub-1050-x-540-2.jpg') center/cover;
     position: relative;
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
