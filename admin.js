@@ -137,22 +137,44 @@ function updateStats() {
 }
 
 function deleteMember(index) {
-    if (confirm('Are you sure you want to delete this member?')) {
-        let members = JSON.parse(localStorage.getItem('bobo_members')) || [];
-        members.splice(index, 1);
-        localStorage.setItem('bobo_members', JSON.stringify(members));
-        loadMembers();
-        updateStats();
-    }
+    const members = JSON.parse(localStorage.getItem('bobo_members')) || [];
+    const member = members[index];
+    
+    showDeleteConfirmation(
+        'Delete Member',
+        `Are you sure you want to permanently delete this member?\n\nMember: ${member.name}\nEmail: ${member.email}\nSchool: ${member.school}\n\nThis action cannot be undone.`,
+        () => {
+            members.splice(index, 1);
+            localStorage.setItem('bobo_members', JSON.stringify(members));
+            loadMembers();
+            updateStats();
+            showProfessionalNotification(
+                'Member Deleted',
+                `Member "${member.name}" has been successfully removed from the system.`,
+                'success'
+            );
+        }
+    );
 }
 
 function deleteBirthday(index) {
-    if (confirm('Are you sure you want to delete this birthday?')) {
-        let birthdays = JSON.parse(localStorage.getItem('bobo_birthdays')) || [];
-        birthdays.splice(index, 1);
-        localStorage.setItem('bobo_birthdays', JSON.stringify(birthdays));
-        loadBirthdays();
-    }
+    const birthdays = JSON.parse(localStorage.getItem('bobo_birthdays')) || [];
+    const birthday = birthdays[index];
+    
+    showDeleteConfirmation(
+        'Delete Birthday Record',
+        `Are you sure you want to delete this birthday record?\n\nName: ${birthday.name}\nBirthday: ${birthday.birthday}\nAge: ${birthday.age}\n\nThis action cannot be undone.`,
+        () => {
+            birthdays.splice(index, 1);
+            localStorage.setItem('bobo_birthdays', JSON.stringify(birthdays));
+            loadBirthdays();
+            showProfessionalNotification(
+                'Birthday Record Deleted',
+                `Birthday record for "${birthday.name}" has been successfully removed.`,
+                'success'
+            );
+        }
+    );
 }
 
 
@@ -434,7 +456,7 @@ function showProfessionalNotification(title, message, type) {
     };
     
     const typeColors = {
-        success: '#28a745',
+        success: '#667eea',
         warning: '#ffc107',
         error: '#dc3545',
         info: '#17a2b8'
@@ -502,5 +524,69 @@ function clearAllData() {
                 'success'
             );
         }
+    }
+}
+function showDeleteConfirmation(title, message, onConfirm, isDangerous = false) {
+    const modal = document.createElement('div');
+    modal.className = 'delete-confirmation-modal';
+    
+    const headerColor = isDangerous ? '#dc3545' : '#667eea';
+    const confirmColor = isDangerous ? '#dc3545' : '#667eea';
+    
+    modal.innerHTML = `
+        <div class="delete-overlay">
+            <div class="delete-content">
+                <div class="delete-header" style="background: ${headerColor}">
+                    <span class="delete-icon">🗑️</span>
+                    <h3>${title}</h3>
+                </div>
+                <div class="delete-body">
+                    <pre>${message}</pre>
+                </div>
+                <div class="delete-footer">
+                    <button onclick="this.closest('.delete-confirmation-modal').remove()" class="cancel-btn">
+                        Cancel
+                    </button>
+                    <button onclick="confirmDelete(this)" class="confirm-btn" style="background: ${confirmColor}">
+                        ${isDangerous ? 'DELETE ALL DATA' : 'Delete'}
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    modal.style.cssText = `
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.8); z-index: 10000; display: flex;
+        align-items: center; justify-content: center;
+    `;
+    
+    const style = document.createElement('style');
+    style.textContent = `
+        .delete-overlay { background: white; border-radius: 12px; max-width: 500px; width: 90%; box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
+        .delete-header { padding: 1.5rem; color: white; border-radius: 12px 12px 0 0; display: flex; align-items: center; gap: 1rem; }
+        .delete-icon { font-size: 1.5rem; }
+        .delete-header h3 { margin: 0; font-size: 1.3rem; font-weight: 600; }
+        .delete-body { padding: 2rem; }
+        .delete-body pre { white-space: pre-wrap; font-family: inherit; margin: 0; line-height: 1.6; color: #333; }
+        .delete-footer { padding: 1rem 2rem 2rem; display: flex; gap: 1rem; justify-content: flex-end; }
+        .cancel-btn, .confirm-btn { border: none; padding: 0.8rem 2rem; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; }
+        .cancel-btn { background: #6c757d; color: white; }
+        .cancel-btn:hover { background: #545b62; }
+        .confirm-btn { color: white; }
+        .confirm-btn:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 15px rgba(102,126,234,0.3); }
+    `;
+    
+    document.head.appendChild(style);
+    document.body.appendChild(modal);
+    
+    modal.confirmCallback = onConfirm;
+}
+
+function confirmDelete(button) {
+    const modal = button.closest('.delete-confirmation-modal');
+    if (modal && modal.confirmCallback) {
+        modal.confirmCallback();
+        modal.remove();
     }
 }

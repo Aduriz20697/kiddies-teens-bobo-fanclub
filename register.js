@@ -140,3 +140,23 @@ function updateTotalAmount() {
     const total = studentCount * 1500;
     document.getElementById('totalAmount').textContent = `Total Amount: ₦${total.toLocaleString()}`;
 }
+
+// File upload display functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('payment_evidence');
+    const fileName = document.querySelector('.file-name');
+    
+    if (fileInput && fileName) {
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+                fileName.textContent = this.files[0].name;
+                fileName.style.color = '#28a745';
+                fileName.style.fontStyle = 'normal';
+            } else {
+                fileName.textContent = 'No file selected';
+                fileName.style.color = '#6c757d';
+                fileName.style.fontStyle = 'italic';
+            }
+        });
+    }
+});

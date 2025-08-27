@@ -115,7 +115,7 @@
                 
                 <div class="form-group">
                     <label for="school_address">School Address *</label>
-                    <textarea id="school_address" name="school_address" rows="3" required></textarea>
+                    <textarea id="school_address" name="school_address" rows="4" required></textarea>
                 </div>
                 
                 <div class="form-group">
@@ -191,7 +191,13 @@
                     
                     <div class="form-group">
                         <label for="payment_evidence">Payment Evidence (Screenshot/Receipt)</label>
-                        <input type="file" id="payment_evidence" name="payment_evidence" accept="image/*,.pdf">
+                        <div class="file-upload-wrapper">
+                            <input type="file" id="payment_evidence" name="payment_evidence" accept="image/*,.pdf" class="file-input">
+                            <label for="payment_evidence" class="file-upload-btn">
+                                📎 Choose File
+                            </label>
+                            <span class="file-name">No file selected</span>
+                        </div>
                         <small>Upload screenshot of payment or receipt (optional but recommended)</small>
                     </div>
                 </div>
